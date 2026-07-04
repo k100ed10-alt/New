@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المحتويات - الرياضيات</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #fcfcfc;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* تنسيق العنوان الرئيسي */
+        .main-header {
+            text-align: left;
+            color: #4a779b;
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+
+        /* تنسيق الأعمدة */
+        .toc-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .column {
+            flex: 1;
+        }
+
+        /* تنسيق عناوين الوحدات */
+        .unit-title {
+            color: #4a779b;
+            font-weight: bold;
+            font-size: 20px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        /* تنسيق القوائم والدروس */
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 17px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        li:hover {
+            color: #d15b40;
+            font-weight: bold;
+        }
+
+        /* النقاط بين اسم الدرس ورقم الصفحة */
+        .dots {
+            flex-grow: 1;
+            border-bottom: 2px dotted #999;
+            margin: 0 10px;
+            position: relative;
+            top: -4px;
+        }
+
+        .page-num {
+            font-family: Arial, sans-serif;
+        }
+
+        /* تنسيقات صفحة الاختبار (Quiz) */
+        #quiz-section {
+            display: none;
+            max-width: 600px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .question-block {
+            margin-bottom: 20px;
+        }
+
+        .question-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #222;
+        }
+
+        .options label {
+            display: block;
+            background: #f4f4f4;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .options label:hover {
+            background: #e9e9e9;
+        }
+
+        .btn {
+            background-color: #4a779b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-family: inherit;
+        }
+
+        .btn:hover {
+            background-color: #365b77;
+        }
+
+        .btn-back {
+            background-color: #888;
+        }
+
+        #result-box {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #27ae60;
+        }
+
+        .correct-ans {
+            background-color: #d4edda !important;
+            border: 1px solid #c3e6cb;
+        }
+
+        .wrong-ans {
+            background-color: #f8d7da !important;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="toc-section">
+        <div class="main-header">المحتويات</div>
+
+        <div class="toc-container">
+            <div class="column">
+                <div style="display: flex; margin-bottom: 20px; font-weight: bold; font-size: 18px;">
+                    <span>كيف تستخدم هذا الكتاب؟</span>
+                    <span class="dots"></span>
+                    <span class="page-num">xii</span>
+                </div>
+
+                <div class="unit-title">الوحدة الأولى: القياس الدائري</div>
+                <ul>
+                    <li onclick="openQuiz('1-1', '١-١ الراديان')">
+                        <span>١-١ الراديان</span><span class="dots"></span><span class="page-num">١٣</span>
+                    </li>
+                    <li onclick="openQuiz('1-2', '٢-١ طول القوس')">
+                        <span>٢-١ طول القوس</span><span class="dots"></span><span class="page-num">١٧</span>
+                    </li>
+                    <li onclick="openQuiz('1-3', '٣-١ مساحة القطاع الدائري')">
+                        <span>٣-١ مساحة القطاع الدائري</span><span class="dots"></span><span class="page-num">٢٠</span>
+                    </li>
+                    <li onclick="openQuiz('rev-1', 'تمارين مراجعة نهاية الوحدة الأولى')">
+                        <span>تمارين مراجعة نهاية الوحدة الأولى</span><span class="dots"></span><span class="page-num">٢٣</span>
+                    </li>
+                </ul>
+
+                <div class="unit-title">الوحدة الثانية: حساب المثلثات</div>
+                <ul>
+                    <li onclick="openQuiz('2-1', '١-٢ الزوايا بين ٠° ، ٩٠°')">
+                        <span>١-٢ الزوايا بين ٠° ، ٩٠°</span><span class="dots"></span><span class="page-num">٢٩</span>
+                    </li>
+                    <li onclick="openQuiz('2-2', '٢-٢ زاوية الأساس (الزاوية المرجعية)')">
+                        <span>٢-٢ زاوية الأساس (الزاوية المرجعية)</span><span class="dots"></span><span class="page-num">٣٣</span>
+                    </li>
+                    <li onclick="openQuiz('2-3', '٣-٢ النسب المثلثية للزوايا العامة')">
+                        <span>٣-٢ النسب المثلثية للزوايا العامة</span><span class="dots"></span><span class="page-num">٣٥</span>
+                    </li>
+                    <li onclick="openQuiz('2-4', '٤-٢ التمثيلات البيانية للدوال المثلثية')">
+                        <span>٤-٢ التمثيلات البيانية للدوال المثلثية</span><span class="dots"></span><span class="page-num">٣٨</span>
+                    </li>
+                    <li onclick="openQuiz('2-5', '٥-٢ الدوال المثلثية العكسية')">
+                        <span>٥-٢ الدوال المثلثية العكسية</span><span class="dots"></span><span class="page-num">٤٣</span>
+                    </li>
+                    <li onclick="openQuiz('2-6', '٦-٢ المعادلات المثلثية')">
+                        <span>٦-٢ المعادلات المثلثية</span><span class="dots"></span><span class="page-num">٤٦</span>
+                    </li>
+                    <li onclick="openQuiz('2-7', '٧-٢ المتطابقات المثلثية')">
+                        <span>٧-٢ المتطابقات المثلثية</span><span class="dots"></span><span class="page-num">٥٠</span>
+                    </li>
+                    <li onclick="openQuiz('2-8', '٨-٢ المزيد من المعادلات المثلثية')">
+                        <span>٨-٢ المزيد من المعادلات المثلثية</span><span class="dots"></span><span class="page-num">٥٣</span>
+                    </li>
+                    <li onclick="openQuiz('rev-2', 'تمارين مراجعة نهاية الوحدة الثانية')">
+                        <span>تمارين مراجعة نهاية الوحدة الثانية</span><span class="dots"></span><span class="page-num">٥٦</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="column">
+                <div class="unit-title">الوحدة الثالثة: مقدمة في النهايات والاتصال</div>
+                <ul>
+                    <li onclick="openQuiz('3-1', '١-٣ نهاية الدالة عند نقطة')">
+                        <span>١-٣ نهاية الدالة عند نقطة</span><span class="dots"></span><span class="page-num">٥٩</span>
+                    </li>
+                    <li onclick="openQuiz('3-1a', '١-٣ أ نهاية الدالة كثيرة الحدود')">
+                        <span>١-٣ أ نهاية الدالة كثيرة الحدود</span><span class="dots"></span><span class="page-num">٥٩</span>
+                    </li>
+                    <li onclick="openQuiz('3-1b', '١-٣ ب نهاية الدالة النسبية')">
+                        <span>١-٣ ب نهاية الدالة النسبية</span><span class="dots"></span><span class="page-num">٦٢</span>
+                    </li>
+                    <li onclick="openQuiz('3-1c', '١-٣ ج نهاية الدالة المعرّفة بأكثر من قاعدة')">
+                        <span>١-٣ ج نهاية الدالة المعرّفة بأكثر من قاعدة</span><span class="dots"></span><span class="page-num">٦٦</span>
+                    </li>
+                    <li onclick="openQuiz('3-2', '٢-٣ نهاية الدالة النسبية عند اللانهاية')">
+                        <span>٢-٣ نهاية الدالة النسبية عند اللانهاية</span><span class="dots"></span><span class="page-num">٧١</span>
+                    </li>
+                    <li onclick="openQuiz('3-3', '٣-٣ خواص النهايات')">
+                        <span>٣-٣ خواص النهايات</span><span class="dots"></span><span class="page-num">٧٣</span>
+                    </li>
+                    <li onclick="openQuiz('3-4', '٤-٣ الاتصال')">
+                        <span>٤-٣ الاتصال</span><span class="dots"></span><span class="page-num">٧٦</span>
+                    </li>
+                    <li onclick="openQuiz('rev-3', 'تمارين مراجعة نهاية الوحدة الثالثة')">
+                        <span>تمارين مراجعة نهاية الوحدة الثالثة</span><span class="dots"></span><span class="page-num">٨٢</span>
+                    </li>
+                </ul>
+
+                <div class="unit-title">الوحدة الرابعة: التفاضل</div>
+                <ul>
+                    <li onclick="openQuiz('4-1', '١-٤ المشتقة وعلاقتها بالميل')">
+                        <span>١-٤ المشتقة وعلاقتها بالميل</span><span class="dots"></span><span class="page-num">٨٥</span>
+                    </li>
+                    <li onclick="openQuiz('4-2', '٢-٤ مشتقة دالة القوة')">
+                        <span>٢-٤ مشتقة دالة القوة</span><span class="dots"></span><span class="page-num">٨٧</span>
+                    </li>
+                    <li onclick="openQuiz('4-3', '٣-٤ قاعدة السلسلة')">
+                        <span>٣-٤ قاعدة السلسلة</span><span class="dots"></span><span class="page-num">٩١</span>
+                    </li>
+                    <li onclick="openQuiz('4-4', '٤-٤ المماس والعمودي')">
+                        <span>٤-٤ المماس والعمودي</span><span class="dots"></span><span class="page-num">٩٣</span>
+                    </li>
+                    <li onclick="openQuiz('4-5', '٥-٤ الدوال المتزايدة والدوال المتناقصة')">
+                        <span>٥-٤ الدوال المتزايدة والدوال المتناقصة</span><span class="dots"></span><span class="page-num">٩٥</span>
+                    </li>
+                    <li onclick="openQuiz('4-6', '٦-٤ النقاط الحرجة')">
+                        <span>٦-٤ النقاط الحرجة</span><span class="dots"></span><span class="page-num">٩٨</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="quiz-section">
+        <h2 id="quiz-title" class="unit-title">عنوان الاختبار</h2>
+        <div id="quiz-content"></div>
+        <button class="btn" id="submit-btn" onclick="checkAnswers()">إرسال الإجابات</button>
+        <button class="btn btn-back" onclick="goBack()">عودة للفهرس</button>
+        <div id="result-box"></div>
+    </div>
+
+    <script>
+        // هنا يمكنك إضافة الأسئلة لكل قسم، وضعت أمثلة لأهم الأقسام
+        const quizzesData = {
+            '1-1': [
+                {
+                    q: "كم درجة في الراديان الواحد تقريباً؟",
+                    options: ["٥٧.٣ درجة", "٩٠ درجة", "١٨٠ درجة", "٣٦٠ درجة"],
+                    answer: 0
+                },
+                {
+                    q: "لتحويل الزاوية من درجات إلى راديان نقوم بضرب الزاوية في:",
+                    options: ["180/π", "π/180", "π", "180"],
+                    answer: 1
+                }
+            ],
+            '2-2': [
+                {
+                    q: "ما هي زاوية الأساس للزاوية ١٥٠ درجة؟",
+                    options: ["٣٠ درجة", "٦٠ درجة", "٩٠ درجة", "١٥٠ درجة"],
+                    answer: 0
+                },
+                {
+                    q: "زاوية الأساس (المرجعية) تكون دائماً:",
+                    options: ["زاوية منفرجة", "زاوية سالبة", "زاوية حادة موجبة", "زاوية مستقيمة"],
+                    answer: 2
+                }
+            ],
+            '4-1': [
+                {
+                    q: "المشتقة الأولى للدالة عند نقطة تمثل رياضياً:",
+                    options: ["طول المنحنى", "مساحة المنطقة المظللة", "ميل المماس للمنحنى", "تقاطع المنحنى مع محور الصادات"],
+                    answer: 2
+                }
+            ]
+        };
+
+        let currentQuizId = '';
+
+        function openQuiz(quizId, quizTitle) {
+            currentQuizId = quizId;
+            document.getElementById('toc-section').style.display = 'none';
+            document.getElementById('quiz-section').style.display = 'block';
+            document.getElementById('quiz-title').innerText = "اختبار: " + quizTitle;
+            document.getElementById('result-box').innerText = '';
+            document.getElementById('submit-btn').style.display = 'inline-block';
+
+            const quizContent = document.getElementById('quiz-content');
+            quizContent.innerHTML = '';
+
+            const questions = quizzesData[quizId];
+
+            // إذا لم يتم برمجة أسئلة لهذا القسم بعد
+            if (!questions || questions.length === 0) {
+                quizContent.innerHTML = '<p>الأسئلة الخاصة بهذا القسم سيتم إضافتها قريباً...</p>';
+                document.getElementById('submit-btn').style.display = 'none';
+                return;
+            }
+
+            // رسم الأسئلة
+            questions.forEach((item, qIndex) => {
+                let html = `<div class="question-block" id="qblock-${qIndex}">
+                                <div class="question-title">${qIndex + 1}- ${item.q}</div>
+                                <div class="options">`;
+                
+                item.options.forEach((opt, optIndex) => {
+                    html += `<label id="label-${qIndex}-${optIndex}">
+                                <input type="radio" name="q${qIndex}" value="${optIndex}"> 
+                                ${opt}
+                             </label>`;
+                });
+
+                html += `</div></div>`;
+                quizContent.innerHTML += html;
+            });
+        }
+
+        function checkAnswers() {
+            const questions = quizzesData[currentQuizId];
+            if (!questions) return;
+
+            let score = 0;
+
+            questions.forEach((item, qIndex) => {
+                const selected = document.querySelector(`input[name="q${qIndex}"]:checked`);
+                
+                // تحديد الإجابة الصحيحة باللون الأخضر دائماً
+                document.getElementById(`label-${qIndex}-${item.answer}`).classList.add('correct-ans');
+
+                if (selected) {
+                    const selectedVal = parseInt(selected.value);
+                    if (selectedVal === item.answer) {
+                        score++;
+                    } else {
+                        // إذا أخطأ، نلون إجابته الخاطئة بالأحمر
+                        document.getElementById(`label-${qIndex}-${selectedVal}`).classList.add('wrong-ans');
+                    }
+                }
+            });
+
+            document.getElementById('result-box').innerText = `نتيجتك هي: ${score} من ${questions.length}`;
+            document.getElementById('submit-btn').style.display = 'none'; // إخفاء زر الإرسال بعد الحل
+        }
+
+        function goBack() {
+            document.getElementById('quiz-section').style.display = 'none';
+            document.getElementById('toc-section').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
